@@ -1,20 +1,20 @@
-// app/layout.tsx
 import "./globals.css";
-import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
-export const metadata: Metadata = {
-  title: "AI Content Generator",
-  description: "Generate AI-powered content easily",
-};
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${outfit.variable} antialiased`}>
+        <ClerkProvider>
+          {children}
+        </ClerkProvider>
+      </body>
     </html>
   );
 }
